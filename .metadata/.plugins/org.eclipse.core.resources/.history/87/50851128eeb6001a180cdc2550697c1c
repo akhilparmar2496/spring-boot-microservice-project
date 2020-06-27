@@ -1,0 +1,5 @@
+package com.microservice.courseinfoservice.model;
+
+public class Course {
+
+}

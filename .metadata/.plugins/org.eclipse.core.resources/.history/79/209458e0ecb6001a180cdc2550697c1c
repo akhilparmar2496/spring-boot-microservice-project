@@ -1,0 +1,23 @@
+package com.microservice.coursecatalogueservice.resource;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+import org.springframework.web.bind.annotation.RestController;
+
+import com.microservice.coursecatalogueservice.model.Catalogue;
+
+@RestController
+public class CourceCatalogueResource {
+	
+	public List<Catalogue> getCatalogue(String userName){
+		List<String> keywords=new ArrayList<String>();
+		keywords.add("java");
+		keywords.add("maven");
+		keywords.add("spring-boot");
+		keywords.add("microservices");
+		return Collections.singletonList(new Catalogue("Introduction to java", "Introductory java course", "java",keywords , 5, "akhil"));
+	}
+
+}

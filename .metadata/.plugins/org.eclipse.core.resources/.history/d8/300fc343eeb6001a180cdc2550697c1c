@@ -1,0 +1,9 @@
+package com.microservice.courseinfoservice.model;
+
+public class Course {
+	private String name;
+	private String author;
+	private CourseLevel courseLevel;
+	
+
+}
