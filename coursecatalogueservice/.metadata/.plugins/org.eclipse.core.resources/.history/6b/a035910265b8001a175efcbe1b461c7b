@@ -1,0 +1,5 @@
+package com.microservice.courseratingdataservice.model;
+
+public class RatingData {
+
+}

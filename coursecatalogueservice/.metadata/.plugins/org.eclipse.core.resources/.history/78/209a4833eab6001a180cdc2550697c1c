@@ -1,0 +1,5 @@
+package com.microservice.coursecatalogueservice.resource;
+
+public class CourceCatalogueResource {
+
+}

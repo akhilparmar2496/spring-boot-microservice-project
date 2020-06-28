@@ -1,0 +1,5 @@
+package com.microservice.coursecatalogueservice.model;
+
+public class Catalogue {
+
+}

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="com.microservice.coursecatalogueservice.model.RatingData"/>
+<fullyQualifiedTypeName name="com.microservice.coursecatalogueservice.model.Catalogue"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="org.springframework.web.client.RestTemplate"/>
+<fullyQualifiedTypeName name="com.microservice.coursecatalogueservice.model.Course"/>
+</qualifiedTypeNameHistroy>
