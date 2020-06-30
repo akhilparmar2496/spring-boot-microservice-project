@@ -1,10 +1,9 @@
 package com.microservice.coursecatalogueservice.resource;
 
+import java.lang.reflect.ParameterizedType;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
-import org.assertj.core.internal.Arrays;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +13,7 @@ import org.springframework.web.client.RestTemplate;
 import com.microservice.coursecatalogueservice.model.Catalogue;
 import com.microservice.coursecatalogueservice.model.Course;
 import com.microservice.coursecatalogueservice.model.RatingData;
+import com.microservice.coursecatalogueservice.model.UserRating;
 
 @RestController
 @RequestMapping("/api")
@@ -33,16 +33,11 @@ public class CourceCatalogueResource {
 		keywords.add("microservices");
 		
 		
-		List<RatingData> ratings=new ArrayList<RatingData>();
-		ratings.add(new RatingData("121", 4));
-		ratings.add(new RatingData("122", 3));
-		ratings.add(new RatingData("123", 4));
-		ratings.add(new RatingData("124", 5));
-		ratings.add(new RatingData("125", 3));
+		UserRating ratings=restTemplate.getForObject("http://localhost:8083/api/ratingsByUser/"+userName,UserRating.class);
 		
 		List<Catalogue> cat=new ArrayList<Catalogue>();
 		
-		for(RatingData r:ratings){
+		for(RatingData r:ratings.getUserRatings()){
 			Course course = restTemplate.getForObject("http://localhost:8082/api/course/"+r.getCourseId(), Course.class);
 			cat.add(new Catalogue(course.getName(), "Courses on java", "Java", keywords, r.getRating(), course.getAuthor()));
 		}
