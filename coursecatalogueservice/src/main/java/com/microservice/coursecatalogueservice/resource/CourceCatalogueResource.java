@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,6 +23,10 @@ public class CourceCatalogueResource {
 	@Autowired
 	private RestTemplate restTemplate;
 
+//	For an setup with 100's of instance of each service you can control load balacne by using discoverclient
+//	@Autowired
+//	private DiscoveryClient discoveryClient;
+	
 	@RequestMapping("/catalogue/{userName}")
 	public List<Catalogue> getCatalogue(@PathVariable String userName){
 		
@@ -33,12 +38,12 @@ public class CourceCatalogueResource {
 		keywords.add("microservices");
 		
 		
-		UserRating ratings=restTemplate.getForObject("http://localhost:8083/api/ratingsByUser/"+userName,UserRating.class);
+		UserRating ratings=restTemplate.getForObject("http://course-rating-service/api/ratingsByUser/"+userName,UserRating.class);
 		
 		List<Catalogue> cat=new ArrayList<Catalogue>();
 		
 		for(RatingData r:ratings.getUserRatings()){
-			Course course = restTemplate.getForObject("http://localhost:8082/api/course/"+r.getCourseId(), Course.class);
+			Course course = restTemplate.getForObject("http://course-info-service/api/course/"+r.getCourseId(), Course.class);
 			cat.add(new Catalogue(course.getName(), "Courses on java", "Java", keywords, r.getRating(), course.getAuthor()));
 		}
 		return cat;
